@@ -122,7 +122,7 @@ export default function ArtistDetailPage() {
           <div>
             <h2 className="text-lg font-semibold text-slate-900 mb-3">Disponibilità prossime</h2>
             {availabilityPreview.length > 0 ? (
-              <div className="grid grid-cols-7 gap-2">
+              <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 {availabilityPreview.map((a: any) => {
                   const date = new Date(a.date);
                   const dayName = date.toLocaleDateString("it-IT", { weekday: "narrow" });

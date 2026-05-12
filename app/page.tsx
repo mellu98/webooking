@@ -8,24 +8,24 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center">
               <Music className="w-4 h-4 text-white" />
             </div>
             <span className="text-lg font-bold text-slate-900 tracking-tight">WEBOOKING</span>
           </div>
-          <div className="hidden sm:flex items-center gap-6">
-            <a href="#come-funziona" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Come funziona</a>
-            <a href="#per-chi" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">Per chi è</a>
+          <div className="flex items-center gap-2 sm:gap-6">
+            <a href="#come-funziona" className="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition-colors">Come funziona</a>
+            <a href="#per-chi" className="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition-colors">Per chi è</a>
             <Link href="/explore">
-              <Button variant="outline" size="sm" className="gap-2">
-                <Search className="w-3.5 h-3.5" /> Esplora
+              <Button variant="outline" size="sm" className="gap-1.5 sm:gap-2 text-xs sm:text-sm h-8 sm:h-9">
+                <Search className="w-3.5 h-3.5" /> <span className="hidden sm:inline">Esplora</span>
               </Button>
             </Link>
             <Link href="/dashboard">
-              <Button size="sm" className="bg-violet-600 hover:bg-violet-700 gap-2">
-                Accedi <ArrowRight className="w-3.5 h-3.5" />
+              <Button size="sm" className="bg-violet-600 hover:bg-violet-700 gap-1.5 sm:gap-2 text-xs sm:text-sm h-8 sm:h-9">
+                <span className="hidden sm:inline">Accedi</span> <span className="sm:hidden">Entra</span> <ArrowRight className="w-3.5 h-3.5" />
               </Button>
             </Link>
           </div>

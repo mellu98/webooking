@@ -36,7 +36,7 @@ export default function DataTable<T>({ columns, data, keyExtractor, loading, onR
   }
 
   return (
-    <div className="rounded-xl border border-slate-200 overflow-hidden">
+    <div className="rounded-xl border border-slate-200 overflow-hidden overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow className="bg-slate-50 hover:bg-slate-50">

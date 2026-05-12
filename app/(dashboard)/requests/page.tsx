@@ -74,7 +74,7 @@ export default function RequestsPage() {
         description="Gestisci la pipeline delle richieste di booking"
         action={
           <div className="flex items-center gap-2">
-            <div className="hidden sm:flex items-center bg-slate-100 rounded-lg p-1">
+            <div className="flex items-center bg-slate-100 rounded-lg p-1">
               <Toggle pressed={view === "list"} onPressedChange={() => setView("list")} className="h-8 px-2">
                 <LayoutList className="w-4 h-4" />
               </Toggle>

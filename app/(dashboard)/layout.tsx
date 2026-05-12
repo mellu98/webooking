@@ -11,7 +11,7 @@ export default function DashboardLayout({
       <AppSidebar />
       <div className="lg:pl-64">
         <Topbar />
-        <main className="p-6">{children}</main>
+        <main className="p-4 md:p-6">{children}</main>
       </div>
     </div>
   );
