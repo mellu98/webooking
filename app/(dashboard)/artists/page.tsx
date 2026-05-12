@@ -94,7 +94,7 @@ export default function ArtistsPage() {
             <DialogTrigger className="inline-flex items-center justify-center rounded-lg border border-transparent bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium h-8 px-2.5 gap-2 transition-colors">
               <Plus className="w-4 h-4" /> Nuovo Artista
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Crea Artista</DialogTitle>
               </DialogHeader>

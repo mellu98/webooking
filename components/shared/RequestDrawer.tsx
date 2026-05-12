@@ -108,7 +108,7 @@ export default function RequestDrawer({ request, open, onClose, onUpdate }: Requ
             )}
           </div>
         </div>
-        <DrawerFooter className="flex-row gap-3">
+        <DrawerFooter className="flex-col sm:flex-row gap-3">
           {request.status === "NEW" || request.status === "IN_NEGOTIATION" ? (
             <>
               <Button
