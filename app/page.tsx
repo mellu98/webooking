@@ -77,7 +77,7 @@ export default function HomePage() {
               <div className="relative grid grid-cols-2 gap-3">
                 <div className="space-y-3">
                   <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-slate-100 relative">
-                    <Image src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?w=400&h=530&fit=crop" alt="Artista" fill className="object-cover" />
+                    <Image src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=530&fit=crop" alt="Artista" fill className="object-cover" />
                   </div>
                   <div className="aspect-square rounded-2xl overflow-hidden bg-slate-100 relative">
                     <Image src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop" alt="Locale" fill className="object-cover" />

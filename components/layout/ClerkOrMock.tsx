@@ -7,7 +7,7 @@ const MockUserContext = createContext<any>(null);
 function MockProvider({ children }: { children: ReactNode }) {
   const mockUser = {
     id: "mock-user-1",
-    fullName: "Marco Rossi",
+    fullName: "Davide Sacco",
     primaryEmailAddress: { emailAddress: "agent@webooking.it" },
     publicMetadata: { role: "BOOKING_AGENT" },
     imageUrl: null,
@@ -30,7 +30,7 @@ export function useUser() {
 export function UserButton() {
   return (
     <div className="w-9 h-9 rounded-full bg-violet-600 text-white flex items-center justify-center text-sm font-bold">
-      MR
+      DS
     </div>
   );
 }
