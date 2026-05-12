@@ -6,7 +6,7 @@ export function ServiceWorkerRegistration() {
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("/sw.js")
+        .register("/sw", { scope: "/" })
         .then((registration) => {
           console.log("SW registered:", registration.scope);
         })
