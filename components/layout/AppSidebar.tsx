@@ -18,7 +18,8 @@ import {
   Mic2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Role } from "@prisma/client";
 
@@ -44,10 +45,11 @@ export default function AppSidebar() {
   const role = (user?.publicMetadata?.role as Role) || "BOOKING_AGENT";
   const roleInfo = roleConfig[role];
   const RoleIcon = roleInfo?.icon || Briefcase;
+  const [open, setOpen] = useState(false);
 
   const filteredNav = navItems.filter((item) => item.roles.includes(role));
 
-  const NavContent = () => (
+  const NavContent = ({ onNavigate }: { onNavigate?: () => void } = {}) => (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-2 px-6 py-5">
         <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center">
@@ -73,6 +75,7 @@ export default function AppSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all",
                 active
@@ -99,12 +102,12 @@ export default function AppSidebar() {
         <NavContent />
       </aside>
       <div className="lg:hidden fixed top-4 left-4 z-50">
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger className="inline-flex items-center justify-center rounded-lg border border-border bg-white size-8 hover:bg-muted hover:text-foreground transition-colors">
             <Menu className="w-4 h-4" />
           </SheetTrigger>
           <SheetContent side="left" className="w-64 bg-slate-950 border-slate-800 p-0">
-            <NavContent />
+            <NavContent onNavigate={() => setOpen(false)} />
           </SheetContent>
         </Sheet>
       </div>
