@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  name      String?
+  role      Role     @default(BOOKING_AGENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  artists         Artist[]
+  venues          Venue[]
+  requestsSent    BookingRequest[] @relation("SentBy")
+  requestsManaged BookingRequest[] @relation("ManagedBy")
+}
+
+enum Role {
+  BOOKING_AGENT
+  VENUE
+  ARTIST
+}
+
+model Artist {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  genre       String
+  city        String
+  bio         String?
+  imageUrl    String?
+  gallery     String? // JSON array of image URLs
+  social      String? // JSON object with social links
+  rating      Float    @default(0)
+  eventTypes  String?
+  fee         Int
+  available   Boolean  @default(true)
+  userId      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user         User?            @relation(fields: [userId], references: [id])
+  requests     BookingRequest[]
+  events       Event[]
+  availability Availability[]
+}
+
+model Venue {
+  id        String   @id @default(cuid())
+  name      String
+  city      String
+  address   String?
+  capacity  Int?
+  type      String?
+  imageUrl  String?
+  contactName String?
+  contactEmail String?
+  contactPhone String?
+  userId    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User?            @relation(fields: [userId], references: [id])
+  requests BookingRequest[]
+  events   Event[]
+}
+
+model BookingRequest {
+  id          String        @id @default(cuid())
+  status      RequestStatus @default(NEW)
+  eventDate   DateTime
+  eventCity   String?
+  offerAmount Int?
+  budget      Int?
+  notes       String?
+  contactName String?
+  contactEmail String?
+  contactPhone String?
+  eventType   String? // concert, festival, private, etc.
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  artistId    String
+  venueId     String
+  sentById    String?
+  managedById String?
+
+  artist    Artist   @relation(fields: [artistId], references: [id])
+  venue     Venue    @relation(fields: [venueId], references: [id])
+  sentBy    User?    @relation("SentBy", fields: [sentById], references: [id])
+  managedBy User?    @relation("ManagedBy", fields: [managedById], references: [id])
+  event     Event?
+}
+
+enum RequestStatus {
+  NEW
+  IN_NEGOTIATION
+  CONFIRMED
+  REJECTED
+}
+
+model Event {
+  id        String      @id @default(cuid())
+  name      String
+  date      DateTime
+  city      String
+  fee       Int
+  status    EventStatus @default(PLANNED)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  requestId String @unique
+  artistId  String
+  venueId   String
+
+  request  BookingRequest @relation(fields: [requestId], references: [id])
+  artist   Artist         @relation(fields: [artistId], references: [id])
+  venue    Venue          @relation(fields: [venueId], references: [id])
+  payments Payment[]
+}
+
+enum EventStatus {
+  PLANNED
+  COMPLETED
+  CANCELLED
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  amount    Int
+  status    PaymentStatus @default(PENDING)
+  paidAt    DateTime?
+  createdAt DateTime      @default(now())
+
+  eventId String
+  event   Event  @relation(fields: [eventId], references: [id])
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+}
+
+model Availability {
+  id        String   @id @default(cuid())
+  date      DateTime
+  available Boolean  @default(true)
+  note      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  artistId String
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+}
